@@ -1,0 +1,4 @@
+src
+*.ts
+*.tsbuildinfo
+node_modules
