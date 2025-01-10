@@ -41,35 +41,9 @@ export * from './constants';
 
 
 
-// src/db/index.ts
-import { Sequelize } from 'sequelize';
-import mongoose from 'mongoose';
-import AWS from 'aws-sdk';
 
-const sequelize = new Sequelize(config.db.postgresUrl!);
-const mongoConnection = mongoose.connect(config.db.mongoUrl!);
-const dynamoDB = new AWS.DynamoDB.DocumentClient({ region: config.db.dynamoRegion });
 
-export { sequelize, mongoConnection, dynamoDB };
 
-// src/encryption/index.ts
-import crypto from 'crypto';
-
-const encrypt = (data: string, key: string) => {
-    const cipher = crypto.createCipher('aes-256-cbc', key);
-    let encrypted = cipher.update(data, 'utf8', 'hex');
-    encrypted += cipher.final('hex');
-    return encrypted;
-};
-
-const decrypt = (encrypted: string, key: string) => {
-    const decipher = crypto.createDecipher('aes-256-cbc', key);
-    let decrypted = decipher.update(encrypted, 'hex', 'utf8');
-    decrypted += decipher.final('utf8');
-    return decrypted;
-};
-
-export { encrypt, decrypt };
 
 // src/api/index.ts
 import axios from 'axios';
