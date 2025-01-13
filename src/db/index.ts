@@ -6,13 +6,18 @@ import { config } from '../config';
 
 class PostgresConnection {
     private static instance: Sequelize | null = null;
+    private sequelize: Sequelize;
+
+    private constructor() {
+        this.sequelize = new Sequelize(config.db.postgresUrl!, {
+            dialect: 'postgres'
+        });
+    }
 
     public static getInstance(): Sequelize {
         if (!PostgresConnection.instance) {
             console.log(`Attempting to connect to Postgres database at: ${config.db.postgresUrl}`);
-            PostgresConnection.instance = new Sequelize(config.db.postgresUrl!, {
-                dialect: 'postgres'
-            });
+            PostgresConnection.instance = new PostgresConnection().sequelize;
         }
         return PostgresConnection.instance;
     }
