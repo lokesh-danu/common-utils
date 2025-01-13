@@ -1,5 +1,5 @@
 {
-  "name": "common-utils",
+  "name": "cmn-uts",
   "version": "1.0.0",
   "description": "common utility for node micro services in Typescript",
   "main": "src/index.ts",
