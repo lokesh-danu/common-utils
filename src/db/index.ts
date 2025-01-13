@@ -1,11 +1,47 @@
 // src/db/index.ts
 import { Sequelize } from 'sequelize';
 import mongoose from 'mongoose';
+import { config } from '../config';
 // import AWS from 'aws-sdk';
 
-const sequelize = new Sequelize(config.db.postgresUrl!);
-const mongoConnection = mongoose.connect(config.db.mongoUrl!);
-// const dynamoDB = new AWS.DynamoDB.DocumentClient({ region: config.db.dynamoRegion });
-const dynamoDB = null;
+class PostgresConnection {
+    private static instance: Sequelize | null = null;
 
-export { sequelize, mongoConnection, dynamoDB };
+    public static getInstance(): Sequelize {
+        if (!PostgresConnection.instance) {
+            PostgresConnection.instance = new Sequelize(config.db.postgresUrl!, {
+                dialect: 'postgres'
+            });
+        }
+        return PostgresConnection.instance;
+    }
+}
+
+
+
+class MongoConnection {
+    private static instance: Promise<typeof mongoose> | null = null;
+
+    public static getInstance(): Promise<typeof mongoose> {
+        if (!MongoConnection.instance && config.db.mongoUrl) {
+            MongoConnection.instance = mongoose.connect(config.db.mongoUrl);
+        }
+        return MongoConnection.instance!;
+    }
+}
+
+
+class DynamoDBConnection {
+    private static instance: any = null;
+
+    public static getInstance(): any {
+        if (!DynamoDBConnection.instance) {
+            // DynamoDBConnection.instance = new AWS.DynamoDB.DocumentClient({ region: config.db.dynamoRegion });
+            DynamoDBConnection.instance = null; // Placeholder as per your original code
+        }
+        return DynamoDBConnection.instance;
+    }
+}
+
+
+export { PostgresConnection, MongoConnection, DynamoDBConnection };

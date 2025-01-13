@@ -21,7 +21,7 @@
 // src/index.ts - Entry point to expose utilities
 export * from './logger';
 export * from './config';
-export * from './auth';
+// export * from './auth';
 export * from './db';
 export * from './encryption';
 // export * from './api';

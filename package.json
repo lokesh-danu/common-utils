@@ -2,7 +2,7 @@
   "name": "common-utils",
   "version": "1.0.0",
   "description": "common utility for node micro services in Typescript",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,6 +24,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.4",
+    "pg": "^8.13.1",
     "prom-client": "^15.1.3",
     "sequelize": "^6.37.5",
     "winston": "^3.17.0",
