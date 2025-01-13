@@ -9,6 +9,7 @@ class PostgresConnection {
 
     public static getInstance(): Sequelize {
         if (!PostgresConnection.instance) {
+            console.log(`Attempting to connect to Postgres database at: ${config.db.postgresUrl}`);
             PostgresConnection.instance = new Sequelize(config.db.postgresUrl!, {
                 dialect: 'postgres'
             });
@@ -16,8 +17,6 @@ class PostgresConnection {
         return PostgresConnection.instance;
     }
 }
-
-
 
 class MongoConnection {
     private static instance: Promise<typeof mongoose> | null = null;
@@ -30,7 +29,6 @@ class MongoConnection {
     }
 }
 
-
 class DynamoDBConnection {
     private static instance: any = null;
 
@@ -42,6 +40,5 @@ class DynamoDBConnection {
         return DynamoDBConnection.instance;
     }
 }
-
 
 export { PostgresConnection, MongoConnection, DynamoDBConnection };
