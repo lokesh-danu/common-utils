@@ -1,10 +1,12 @@
 {
   "name": "cmn-uts",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "common utility for node micro services in Typescript",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "keywords": [
     "cmn-uts", "common", "utils", "microservices"
@@ -39,6 +41,7 @@
   },
   "files": [
     "types/**/*",
-    "src/**/*"
+    "src/**/*",
+    "dist/**/*"
   ]
 }
